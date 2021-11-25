@@ -9,7 +9,6 @@
     "require": {
         "symfony/var-dumper": "^5.3",
         "slim/slim": "^4.8",
-        "slim/psr7": "^1.4",
-        "aws/aws-sdk-php": "2.*"
+        "slim/psr7": "^1.4"
     }
 }

@@ -11,7 +11,7 @@ services:
       - .:/var/www/html    
     env_file:
       - .env
-      
+
   nginx:
     container_name: hackathon_nginx
     image: nginx:latest

@@ -4,7 +4,6 @@ use Hackathon\Database;
 use Hackathon\Produto;
 use Hackathon\Empresa;
 use Hackathon\Categoria;
-use Hackathon\Login;
 
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -60,17 +59,6 @@ $logMiddleware = function (Request $request, RequestHandlerInterface $handler) {
 $produtoQuery = new Produto($database);
 $empresaQuery = new Empresa($database);
 $categoriaQuery = new Categoria($database);
-$loginQuery = new Login($database);
-
-$app->post('/usuario', function (Request $request, Response $response) use ($loginQuery) {
-    $loginBody = json_decode($request->getBody()->getContents());
-    $id = $loginQuery->usuario($loginBody);
-    
-    $response->getBody()->write(json_encode($newProduto));
-    return $response
-             ->withHeader('Content-Type', 'application/json')
-             ->withStatus(201);
-});
 
 $app->get('/produtos', function (Request $request, Response $response) use ($produtoQuery){
     $response->getBody()->write(json_encode($produtoQuery->getAll()));
