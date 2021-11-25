@@ -1,0 +1,6 @@
+25/11/2021 00:12:19 [POST] http://localhost:8080/produto 201 0.05s
+25/11/2021 00:24:09 [PUT] http://localhost:8080/produto/1 200 0.06s
+25/11/2021 00:36:10 [POST] http://localhost:8080/categoria 201 0.05s
+25/11/2021 00:40:11 [PUT] http://localhost:8080/categoria/1 200 0.05s
+25/11/2021 00:45:38 [POST] http://localhost:8080/empresa 201 0.04s
+25/11/2021 00:46:17 [PUT] http://localhost:8080/empresa/2 200 0.04s

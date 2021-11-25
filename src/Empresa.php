@@ -5,18 +5,23 @@ declare(strict_types=1);
 namespace Hackathon;
 
 use PDO;
-use Utils\QueryUtils;
 
 class Empresa
 {
     public function __construct(
-        protected PDO $database
-    ) {}
+        protected PDO $database,
+    ) {
+    }
 
-    public function get()
+    public function getAll()
     {
-        $sql = 'SELECT id_empresa, empresa, telefone FROM hackathon.empresa';
-    
+        $sql = 
+        'SELECT 
+            id_empresa,
+            empresa,
+            telefone
+        FROM hackathon.empresa';
+
         $stmt = $this->database->prepare($sql);
 
         $stmt->execute();
@@ -25,35 +30,69 @@ class Empresa
         return $records;
     }
 
-    public function post($empresa)
+    public function getById(int|string $id)
     {
-        $queryUtils = new QueryUtils();
 
-        $response_S3 = $queryUtils->uploadS3($empresa->produto, '');
-
-        $sql = "INSERT INTO hackathon.produto (produto, link, descricao, valor, categoria_id, empresa_id) VALUES ($empresa->produto, $response_S3->get('ObjectUrl'), $empresa->descricao, $empresa->valor, $empresa->categoria_id, $empresa->empresa_id)";
+        $sql = 
+        'SELECT 
+            id_empresa,
+            empresa,
+            telefone
+        FROM hackathon.empresa WHERE id_empresa = :id';
 
         $stmt = $this->database->prepare($sql);
 
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $record = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        if ($record) {
+          return $record;
+        }
+
+        return null;
+    }
+
+
+    public function post($empresa)
+    {
+        $sql = 
+        'INSERT INTO hackathon.empresa (empresa, telefone) VALUES (:empresa, :telefone)';
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(":empresa", $empresa->empresa);
+        $stmt->bindParam(":telefone", $empresa->telefone);
         $stmt->execute();
 
         return $this->database->lastInsertId();
     }
 
-    public function put()
-    {
-        $sql = 'select * from hackathon.empresa';
+    public function put(int|string $id, $empresa)
+    {   
+        $sql = 
+        'UPDATE hackathon.empresa t SET 
+            t.empresa = :empresa,
+            t.telefone = :telefone
+        WHERE t.id_empresa = :id';
 
-        return $this->database->query($sql)->fetchAll();
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":empresa", $empresa->empresa);
+        $stmt->bindParam(":telefone", $empresa->telefone);
+    
+        $stmt->execute();
+
+        return $this->getById($id);
     }
 
-    public function delete()
+    public function delete(int|string $id)
     {
-        $sql = 'select * from hackathon.empresa';
+        $sql = 'DELETE FROM hackathon.empresa WHERE id_empresa = :id';
 
-        return $this->database->query($sql)->fetchAll();
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+
+        return 'Success';
     }
-
-   
 }

@@ -5,18 +5,22 @@ declare(strict_types=1);
 namespace Hackathon;
 
 use PDO;
-use Utils\QueryUtils;
 
 class Categoria
 {
     public function __construct(
-        protected PDO $database
-    ) {}
+        protected PDO $database,
+    ) {
+    }
 
-    public function get()
+    public function getAll()
     {
-        $sql = 'select id_categoria,categoria from hackathon.categoria';
-    
+        $sql = 
+        'SELECT 
+            id_categoria,
+            categoria
+        FROM hackathon.categoria';
+
         $stmt = $this->database->prepare($sql);
 
         $stmt->execute();
@@ -25,32 +29,65 @@ class Categoria
         return $records;
     }
 
-    public function post($produtos)
+    public function getById(int|string $id)
     {
-        $queryUtils = new QueryUtils();
 
-        $response_S3 = $queryUtils->uploadS3($produtos->produto, '');
-
-        $sql = "INSERT INTO hackathon.produto (produto, link, descricao, valor, categoria_id, empresa_id) VALUES ($produtos->produto, $response_S3->get('ObjectUrl'), $produtos->descricao, $produtos->valor, $produtos->categoria_id, $produtos->empresa_id)";
+        $sql = 
+        'SELECT 
+            id_categoria,
+            categoria
+        FROM hackathon.categoria WHERE id_categoria = :id';
 
         $stmt = $this->database->prepare($sql);
 
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($record) {
+          return $record;
+        }
+
+        return null;
+    }
+
+
+    public function post($categoria)
+    {
+        $sql = 
+        'INSERT INTO hackathon.categoria (categoria) VALUES (:categoria)';
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(":categoria", $categoria->categoria);
         $stmt->execute();
 
         return $this->database->lastInsertId();
     }
 
-    public function put()
-    {
-        $sql = 'select * from hackathon.produto';
+    public function put(int|string $id, $categoria)
+    {   
+        $sql = 
+        'UPDATE hackathon.categoria t SET 
+            t.categoria = :categoria
+        WHERE t.id_categoria = :id';
 
-        return $this->database->query($sql)->fetchAll();
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":categoria", $categoria->categoria);
+    
+        $stmt->execute();
+
+        return $this->getById($id);
     }
 
-    public function delete()
+    public function delete(int|string $id)
     {
-        $sql = 'select * from hackathon.produto';
+        $sql = 'DELETE FROM hackathon.produto WHERE id_produto = :id';
 
-        return $this->database->query($sql)->fetchAll();
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+
+        return 'Success';
     }
 }
