@@ -83,7 +83,7 @@ $app->get('/produto/{id}', function (Request $request, Response $response, $args
 });
 
 
-$app->get('/produto/categoria/{id}', function (Request $request, Response $response, $args) use ($produtoQuery) {
+$app->get('/produtos/categoria/{id}', function (Request $request, Response $response, $args) use ($produtoQuery) {
 
     $id = $args['id'];
     $produto = $produtoQuery->getByCategoria($id);
@@ -98,7 +98,7 @@ $app->get('/produto/categoria/{id}', function (Request $request, Response $respo
 });
 
 
-$app->get('/produto/empresa/{id}', function (Request $request, Response $response, $args) use ($produtoQuery) {
+$app->get('/produtos/empresa/{id}', function (Request $request, Response $response, $args) use ($produtoQuery) {
 
     $id = $args['id'];
     $produto = $produtoQuery->getByEmpresa($id);

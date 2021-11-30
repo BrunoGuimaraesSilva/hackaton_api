@@ -79,7 +79,7 @@ class Produto
 
         $stmt->bindParam(":id", $id);
         $stmt->execute();
-        $record = $stmt->fetch(PDO::FETCH_ASSOC);
+        $record = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if ($record) {
           return $record;
@@ -107,7 +107,7 @@ class Produto
 
         $stmt->bindParam(":id", $id);
         $stmt->execute();
-        $record = $stmt->fetch(PDO::FETCH_ASSOC);
+        $record = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if ($record) {
           return $record;

@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "ad343446-cb4f-427b-ba6d-fb9445e9afe2",
+		"name": "Hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Produtos",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/produtos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get with Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/produto/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"produto\":\"macbook2\",\r\n    \"descricao\":\"descricao\",\r\n    \"valor\" : \"15000\",\r\n    \"base64\":\"1234\",\r\n    \"categoria_id\":\"1\",\r\n    \"empresa_id\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/produto",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"produto\":\"dale\",\r\n    \"descricao\":\"descricao\",\r\n    \"valor\" : \"150.00\",\r\n    \"base64\":\"text\",\r\n    \"categoria_id\":\"1\",\r\n    \"empresa_id\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/produto/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/produto/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produto",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All by categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/produtos/categoria/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produtos",
+								"categoria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All by empresa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/produtos/empresa/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"produtos",
+								"empresa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get with Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categoria/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\":\"smartphone\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/categoria",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\":\"Celular\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/categoria/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categoria/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empresas",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/empresas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empresas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get with Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/empresa/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empresa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"empresa\":\"smartphone\",\r\n    \"telefone\":\"000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/empresa",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empresa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"empresa\":\"Microsoft\",\r\n    \"telefone\":\"000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/empresa/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empresa",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/empresa/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"empresa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
