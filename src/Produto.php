@@ -61,6 +61,60 @@ class Produto
         return null;
     }
 
+    public function getByCategoria(int|string $id)
+    {
+        
+        $sql = 
+        'SELECT 
+            id_produto,
+            produto,
+            categoria_id,
+            descricao,
+            base64,
+            valor,
+            empresa_id
+        FROM hackathon.produto WHERE categoria_id = :id';
+
+        $stmt = $this->database->prepare($sql);
+
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($record) {
+          return $record;
+        }
+
+        return null;
+    }
+
+    
+    public function getByEmpresa(int|string $id)
+    {
+        
+        $sql = 
+        'SELECT 
+            id_produto,
+            produto,
+            categoria_id,
+            descricao,
+            base64,
+            valor,
+            empresa_id
+        FROM hackathon.produto WHERE empresa_id = :id';
+
+        $stmt = $this->database->prepare($sql);
+
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $record = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($record) {
+          return $record;
+        }
+
+        return null;
+    }
 
     public function post($produtos)
     {
